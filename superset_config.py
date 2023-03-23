@@ -11,3 +11,17 @@ PROXY_FIX_CONFIG = {
     "x_port": 0,
     "x_prefix": 0,
 }
+
+FEATURE_FLAGS = {
+    "EMBEDDED_SUPERSET": True,
+    "EMBEDDABLE_CHARTS": True,
+}
+CORS_OPTIONS = {
+    "supports_credentials": True,
+    "allow_headers": ["*"],
+    "resources": ["*"],
+    "origins": ["*"],
+}
+PUBLIC_ROLE_LIKE_GAMMA = True
+SESSION_COOKIE_SAMESITE = None
+
