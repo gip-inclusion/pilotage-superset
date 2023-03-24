@@ -7,6 +7,7 @@ RUN apt-get update \
     build-essential \
     libpq-dev \
     git \
+    vim \
     && apt-get autoremove -yqq --purge \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
@@ -15,8 +16,8 @@ USER superset
 
 RUN pip install --no-cache-dir psycopg2-binary
 
-COPY superset_config.py .
-COPY entrypoint.sh .
+COPY --chown=superset:root superset_config.py .
+COPY --chown=superset:root entrypoint.sh .
 
 CMD ["bash", "-c", "./entrypoint.sh"]
 
