@@ -41,7 +41,9 @@ response = session.post(
         "resources": [
             {"type": "dashboard", "id": "b5f13922-14b8-43fe-991a-221785eef7d4"}
         ],
-        "rls": [],
+        "rls": [
+            {"dataset": 26, "clause": "region = 'Bretagne'"}
+        ],
     },
     headers=headers,
 )

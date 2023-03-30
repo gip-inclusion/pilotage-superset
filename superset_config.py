@@ -32,7 +32,6 @@ FEATURE_FLAGS = {
 # We can also just acknowledge that this is a production setting ?
 GUEST_ROLE_NAME = "Embed"
 GUEST_TOKEN_JWT_SECRET = os.getenv("GUEST_TOKEN_JWT_SECRET")
-GUEST_TOKEN_JWT_EXP_SECONDS = 3600
 
 TALISMAN_ENABLED = True
 TALISMAN_CONFIG = {
@@ -50,3 +49,37 @@ TALISMAN_CONFIG = {
         "frame-ancestors": ["'self'", "http://127.0.0.1:8000"],
     }
 }
+
+
+REDIS_URL = os.getenv("REDIS_URL")
+if REDIS_URL:
+    from datetime import timedelta
+
+    CACHE_CONFIG = {
+        "CACHE_TYPE": "RedisCache",
+        "CACHE_DEFAULT_TIMEOUT": int(timedelta(days=1).total_seconds()),
+        "CACHE_KEY_PREFIX": "superset_cache_",
+        "CACHE_REDIS_URL": f"{REDIS_URL}/0",
+    }
+
+    # Cache for datasource metadata and query results
+    DATA_CACHE_CONFIG = {
+        "CACHE_TYPE": "RedisCache",
+        "CACHE_DEFAULT_TIMEOUT": int(timedelta(days=1).total_seconds()),
+        "CACHE_KEY_PREFIX": "superset_data_",
+        "CACHE_REDIS_URL": f"{REDIS_URL}/0",
+    }
+
+    FILTER_STATE_CACHE_CONFIG = {
+        "CACHE_TYPE": "RedisCache",
+        "CACHE_DEFAULT_TIMEOUT": int(timedelta(days=1).total_seconds()),
+        "CACHE_KEY_PREFIX": "superset_filter_",
+        "CACHE_REDIS_URL": f"{REDIS_URL}/0",
+    }
+
+    EXPLORE_FORM_DATA_CACHE_CONFIG = {
+        "CACHE_TYPE": "RedisCache",
+        "CACHE_DEFAULT_TIMEOUT": int(timedelta(days=1).total_seconds()),
+        "CACHE_KEY_PREFIX": "superset_explore_",
+        "CACHE_REDIS_URL": f"{REDIS_URL}/0",
+    }

@@ -14,10 +14,11 @@ RUN apt-get update \
 
 USER superset
 
-RUN pip install --no-cache-dir psycopg2-binary
+RUN pip install --no-cache-dir --force-reinstall psycopg2-binary gevent gunicorn
 
-COPY --chown=superset:root superset_config.py .
+COPY --chown=superset:root embed-role.json .
 COPY --chown=superset:root entrypoint.sh .
+COPY --chown=superset:root superset_config.py .
 
 CMD ["bash", "-c", "./entrypoint.sh"]
 
