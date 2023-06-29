@@ -12,6 +12,7 @@ if [[ "$SUPERSET_INIT" == "1" ]]; then
 				--lastname Admin \
 				--email admin@superset.com \
 				--password "${SUPERSET_ADMIN_PASSWORD}"
+	superset fab reset-password --username admin --password "${SUPERSET_ADMIN_PASSWORD}"
 
 	superset fab import-roles --path embed-role.json
 	superset db upgrade
